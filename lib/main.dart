@@ -14,7 +14,27 @@ class myapp extends StatefulWidget {
 }
 
 class _myappState extends State<myapp> {
-  List ToDOlist=[{"2":"2",}, {"5":"1",},];
+  List ToDOlist = [];
+  String item = "";
+
+  Myinputchange(value) {
+    setState(() {
+      item = value;
+    });
+  }
+
+  Additem()
+  {
+    setState(() {
+      ToDOlist.add({"item":item});
+    });
+  }
+  Removeitem(index){
+    setState(() {
+      ToDOlist.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,15 +50,13 @@ class _myappState extends State<myapp> {
                   children: [
                     Expanded(
                       flex:80,
-                      child: TextField(
-                          decoration: textfield("item"),
-                      ),
+                      child: TextField(onChanged: (value){ Myinputchange(value);}, decoration: textfield("item"),),
                     ),
                     Expanded(
                         flex: 20,
                         child: ElevatedButton(
                             style: buttonStyle(),
-                            onPressed: (){},
+                            onPressed: (){Additem();},
                             child: Text(
                                 "ad item")
                       //  style:buttondesign
@@ -56,8 +74,8 @@ class _myappState extends State<myapp> {
                       child:sizebox(
                         Row(
                             children: [
-                              Expanded(flex:80, child: Text("item"),),
-                              Expanded(flex: 20, child: TextButton(onPressed: (){}, child: Icon(Icons.delete)
+                              Expanded(flex:80, child: Text(ToDOlist[index]["item"].toString()),),
+                              Expanded(flex: 20, child: TextButton(onPressed: (){ Removeitem(index);}, child: Icon(Icons.delete)
                                 //  style:buttondesign
                               )),
                             ],
