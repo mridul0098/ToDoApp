@@ -23,7 +23,7 @@ SizedBox sizebox(child){
     width: double.infinity,
     child: Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(8),
       child: child,
 
     ),
